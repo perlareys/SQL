@@ -1,0 +1,15 @@
+SELECT nombre FROM jugadores ORDER BY nombre;
+SELECT nombre FROM jugadores WHERE posicion='C' AND peso>200;
+SELECT nombre FROM equipos ORDER BY nombre;
+SELECT nombre FROM equipos WHERE Conferencia='East';
+SELECT nombre, ciudad FROM equipos WHERE Ciudad LIKE 'C%' ORDER BY nombre;
+SELECT Nombre, Nombre_equipo FROM jugadores ORDER BY Nombre_equipo;
+SELECT Nombre FROM jugadores WHERE Nombre_equipo='Raptors' ORDER BY Nombre;
+SELECT Puntos_por_partido FROM estadisticas WHERE jugador= (SELECT Codigo FROM jugadores WHERE Nombre='Pau Gasol');
+SELECT Puntos_por_partido FROM estadisticas WHERE temporada='04/05' AND jugador= (SELECT Codigo FROM jugadores WHERE Nombre='Pau Gasol');
+SELECT Nombre ,SUM(Puntos_por_partido) AS Puntos_totales FROM estadisticas INNER JOIN jugadores ON jugador=codigo GROUP BY Nombre;
+SELECT Nombre_equipo, COUNT(Nombre) FROM jugadores GROUP BY Nombre_equipo;
+SELECT Nombre ,SUM(Puntos_por_partido) AS Puntos_totales FROM estadisticas INNER JOIN jugadores ON jugador=codigo GROUP BY Nombre ORDER BY Puntos_totales DESC LIMIT 1;
+SELECT equipos.nombre, conferencia, division, jugadores.nombre, altura FROM equipos INNER JOIN jugadores ON equipos.nombre=Nombre_equipo ORDER BY altura DESC LIMIT 1;
+SELECT equipo_local, equipo_visitante, puntos_local - puntos_visitante AS Diferencia_puntos FROM partidos ORDER BY Diferencia_puntos DESC;
+SELECT equipo_local, equipo_visitante, CASE WHEN puntos_local>puntos_visitante THEN equipo_local WHEN puntos_visitante>puntos_local THEN equipo_visitante ELSE NULL END AS equipo_ganador  FROM partidos;
